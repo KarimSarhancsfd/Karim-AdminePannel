@@ -1,8 +1,8 @@
-import { creatContext, useState, useMemo } from "react";
-import { createTheme } from "react";
+import { createContext, useState, useMemo } from "react";
+import { createTheme } from "@mui/material/styles";  // Correct import source
 
 //color design tokens
-export const colors = (mode) => ({
+export const tokens = (mode) => ({
   ...(mode === "dark"
     ? {
         grey: {
@@ -121,13 +121,12 @@ export const colors = (mode) => ({
 
 // mui theme settings
 export const themesettings = (mode) => {
-  const colors = colors(mode);
+  const colors = tokens(mode);
 
   return {
     palette: {
       mode: mode,
-      ...colors(
-        mode === "dark"
+      ...(mode === "dark"
           ? {
               primary: {
                 main: colors.primary[500],
@@ -195,7 +194,7 @@ export const themesettings = (mode) => {
 
 
 // context for color mode
-export const ColorModeContext = creatContext({
+export const ColorModeContext = createContext({
     toogleColorMode: () => {},
 });
 
@@ -204,12 +203,14 @@ export const useMode = () => {
 
     const colorMode = useMemo(
         () => ({
-            toogleColorMode: () =>
-                setMode((prev) => (prev === "light" ? "dark" : "light")),
+            toggleColorMode: () => {
+                setMode((prev) => (prev === "light" ? "dark" : "light"));
+            },
         }),
         []
-    )
-        const theme = useMemo(() => createTheme(themesettings(mode)), [mode]);
-        return [theme,colorMode];
-}
+    );
+
+    const theme = useMemo(() => createTheme(themesettings(mode)), [mode]);
+    return [theme, colorMode];  // Make sure both variables are defined
+};
 
