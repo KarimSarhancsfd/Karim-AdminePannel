@@ -1,8 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom"; // <-- add useNavigate
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -72,7 +71,7 @@ const CustomSidebar = () => {
   );
 
   // Update selected when route changes
-  React.useEffect(() => {
+  useEffect(() => {
     setSelected(getSelectedFromPath(location.pathname));
   }, [location.pathname]);
 
@@ -81,10 +80,10 @@ const CustomSidebar = () => {
       sx={{
         height: "100%",
         "& .ps-sidebar-root": {
-          background: `${colors.primary[400]} !important`,
+          background: `${colors.primary[900]} !important`,
         },
         "& .ps-menuitem-root": {
-          color: `${colors.grey[100]} !important`,
+          color: `${colors.grey[50]} !important`,
         },
         "& .ps-menuitem-root.ps-active": {
           color: "#868dfb !important",
@@ -156,13 +155,15 @@ const CustomSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Data
-            </Typography>
+            {!isCollapsed && (
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+              >
+                Data
+              </Typography>
+            )}
             <SidebarMenuItem
               title="Manage Team"
               to="/team"
@@ -184,13 +185,15 @@ const CustomSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Pages
-            </Typography>
+            {!isCollapsed && (
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+              >
+                Pages
+              </Typography>
+            )}
             <SidebarMenuItem
               title="Profile Form"
               to="/form"
@@ -212,13 +215,15 @@ const CustomSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Charts
-            </Typography>
+            {!isCollapsed && (
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+              >
+                Charts
+              </Typography>
+            )}
             <SidebarMenuItem
               title="Bar Chart"
               to="/bar"
