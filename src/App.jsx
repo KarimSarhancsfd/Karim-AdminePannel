@@ -10,7 +10,7 @@ import Contacts from "./scenes/contacts";
 import Calendar from "./scenes/calendar";
 import Form from "./scenes/form";
 import FAQ from "./scenes/faq";
-// import Bar from "./scenes/dashboard/bar";
+import Bar from "./scenes/bar";
 // import Line from "./scenes/dashboard/line";
 // import Pie from "./scenes/dashboard/pie";
 // import Geography from "./scenes/dashboard/geography";
@@ -33,7 +33,7 @@ function App() {
               <Route path="/form" element={<Form/>}/>
                <Route path="/calendar" element={<Calendar/>}/>
                 <Route path="/faq" element={<FAQ/>}/>
-              {/* <Route path="/bar" element={<Bar/>}/> */}
+              <Route path="/bar" element={<Bar/>}/>
               {/* <Route path="/line" element={<Line/>}/> */}
               {/* <Route path="/pie" element={<Pie/>}/> */}
               {/* <Route path="/geography" element={<Geography/>}/> */}
