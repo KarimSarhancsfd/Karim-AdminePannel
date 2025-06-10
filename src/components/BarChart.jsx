@@ -9,7 +9,27 @@ const BarChart = ({ isDashboard = false }) => {
 
   return (
     <ResponsiveBar
+    
       data={data}
+      indexBy="country"
+      labelSkipWidth={12}
+      labelSkipHeight={12}
+      colors={{ scheme: "set2" }}
+      borderRadius={10}
+      enableTotals={{
+        enabled: true,
+        textColor:
+          theme.palette.mode === "dark"
+            ? colors.greenAccent[200]
+            : colors.grey[900],
+        background:
+          theme.palette.mode === "dark"
+            ? colors.primary[700]
+            : colors.primary[100],
+        lineColor: colors.grey[500],
+      }}
+      motionConfig="gentle"
+      valueFormat=" >-$"
       theme={{
         // added
         axis: {
@@ -39,19 +59,12 @@ const BarChart = ({ isDashboard = false }) => {
           },
         },
       }}
-      labelSkipWidth={3}
       labelTextColor={{
         from: "color",
         modifiers: [["darker", 1.6]],
       }}
       keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-      indexBy="country"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-      borderRadius={7}
-      padding={0.3}
-      valueScale={{ type: "linear" }}
-      indexScale={{ type: "band", round: true }}
-      colors={{ scheme: "set2" }}
       defs={[
         {
           id: "dots",
@@ -94,8 +107,6 @@ const BarChart = ({ isDashboard = false }) => {
         legendPosition: "middle",
         legendOffset: -40,
       }}
-    
-  
       legends={[
         {
           dataFrom: "keys",
@@ -124,6 +135,40 @@ const BarChart = ({ isDashboard = false }) => {
       barAriaLabel={function (e) {
         return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
       }}
+      tooltip={({ id, value, color, indexValue }) => (
+        <div
+          style={{
+            background: theme.palette.mode === "dark" 
+                ? colors.primary[700] 
+                : colors.primary[100],
+            padding: "12px",
+            borderRadius: "8px",
+            boxShadow: theme.shadows[3],
+            color: theme.palette.mode === "dark" 
+                ? colors.grey[100] 
+                : colors.grey[900],
+            border: `1px solid ${colors.grey[500]}`,
+            minWidth: "180px"
+        }}
+    >
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}>
+            <div style={{
+                width: "12px",
+                height: "12px",
+                backgroundColor: color,
+                marginRight: "8px",
+                borderRadius: "3px"
+            }} />
+            <strong>{indexValue}</strong>
+        </div>
+        <div style={{ marginLeft: "20px" }}>
+            <div>ID: <strong>{id}</strong></div>
+            <div>Label: <strong>{indexValue}</strong></div>
+            <div>Value: <strong>{value}</strong></div>
+            <div>Color: <strong>{color}</strong></div>
+        </div>
+    </div>
+)}
     />
   );
 };
