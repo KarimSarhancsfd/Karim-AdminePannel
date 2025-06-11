@@ -9,56 +9,47 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
 
   return (
     <ResponsiveLine
-      data={data}
-      theme={{
-        axis: {
-          domain: {
-            line: {
-              stroke: colors.grey[100],
-            },
-          },
-          legend: {
-            text: {
-              fill: colors.grey[100],
-            },
-          },
-          ticks: {
-            line: {
-              stroke: colors.grey[100],
-              strokeWidth: 1,
-            },
-            text: {
-              fill: colors.grey[100],
-            },
-          },
+  data={data}
+  theme={{
+    axis: {
+      domain: {
+        line: {
+          stroke: colors.grey[100],
         },
-        legends: {
-          text: {
-            fill: colors.grey[100],
-          },
+      },
+      legend: {
+        text: {
+          fill: colors.grey[100],
         },
-        tooltip: {
-          container: {
-            color: colors.primary[500],
-          },
+      },
+      ticks: {
+        line: {
+          stroke: colors.grey[100],
+          strokeWidth: 1,
         },
-      }}
-      
-      colors={isDashboard ? { datum: "color" } : { scheme: "set2" }} // added
-      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-      xScale={{ type: "point" }}
-      yScale={{
-        type: "linear",
-        min: "auto",
-        max: "auto",
-        stacked: true,
-        reverse: false,
-      }}
-      yFormat=" >-.2f"
-      curve="catmullRom"
-      axisTop={null}
+        text: {
+          fill: colors.grey[100],
+        },
+      },
+    },
+    legends: {
+      text: {
+        fill: colors.grey[100],
+      },
+    },
+    tooltip: {
+      container: {
+        color: colors.primary[900],
+      },
+    },
+  }}
+ 
+  margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+  yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
+  axisTop={null}
       axisRight={null}
-      axisBottom={{
+  curve="catmullRom"
+  axisBottom={{
         orient: "bottom",
         tickSize: 0,
         tickPadding: 5,
@@ -77,15 +68,15 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
         legendOffset: -40,
         legendPosition: "middle",
       }}
-      enableGridX={false}
-      enableGridY={false}
-      pointSize={8}
-      pointColor={{ theme: "background" }}
-      pointBorderWidth={2}
-      pointBorderColor={{ from: "serieColor" }}
-      pointLabelYOffset={-12}
-      useMesh={true}
-      legends={[
+  colors={isDashboard ? { datum: "set1" } : { scheme: "set2" }} // added
+  pointColor={{ theme: 'background' }}
+  pointBorderWidth={2}
+  pointBorderColor={{ from: 'seriesColor' }}
+  pointLabelYOffset={-12}
+  enableArea={true}
+  enableTouchCrosshair={true}
+  useMesh={true}
+  legends={[
         {
           anchor: "bottom-right",
           direction: "column",
@@ -111,7 +102,8 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
           ],
         },
       ]}
-    />
+  isFocusable={true}
+/>
   );
 };
 
