@@ -7,6 +7,7 @@ import { mockGeographyData as data } from "../data/mockData";
 const GeographyChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  
   return (
     <ResponsiveChoropleth
       data={data}
@@ -37,6 +38,15 @@ const GeographyChart = ({ isDashboard = false }) => {
             fill: colors.grey[100],
           },
         },
+        tooltip: {
+          container: {
+            background: colors.primary[900],
+            color: colors.grey[100],
+            padding: 12,
+            borderRadius: 4,
+            border: `1px solid ${colors.grey[500]}`,
+          },
+        },
       }}
       features={geoFeatures.features}
       margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
@@ -50,6 +60,22 @@ const GeographyChart = ({ isDashboard = false }) => {
       projectionRotation={[0, 0, 0]}
       borderWidth={1.5}
       borderColor="#ffffff"
+      isInteractive={true}
+      tooltip={({ feature }) => (
+        <div
+          style={{
+
+          //  isDark ? background: colors.primary[100] : background: colors.primary[900],
+            padding: "12px",
+            borderRadius: "15px",
+            color: colors.grey[100],
+            border: `1px solid ${colors.grey[500]}`,
+          }}
+        >
+          <strong>{feature?.properties?.name}</strong>
+          
+        </div>
+      )}
       legends={
         !isDashboard
           ? [

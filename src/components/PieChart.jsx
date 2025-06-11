@@ -9,7 +9,7 @@ const PieChart = ({ isCustomPieColors = false, isDashboard = false }) => {
   return (
     <ResponsivePie /* or Pie for fixed dimensions */
       data={data}
-      isInteractive={false}
+      // isInteractive={false}
       theme={{
         axis: {
           domain: {
@@ -38,6 +38,16 @@ const PieChart = ({ isCustomPieColors = false, isDashboard = false }) => {
             fill: colors.grey[100],
           },
         },
+
+        tooltip: {
+          container: {
+            background: colors.primary[900],
+            color: colors.grey[100],
+            padding: 12,
+            borderRadius: 4,
+            border: `1px solid ${colors.grey[500]}`,
+          },
+        },
       }}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       innerRadius={0.6}
@@ -56,7 +66,20 @@ const PieChart = ({ isCustomPieColors = false, isDashboard = false }) => {
       motionConfig="gentle"
       transitionMode="centerRadius"
       arcLabelsTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-       
+      tooltip={({  indexValue }) => (
+        <div
+          style={{
+             
+            padding: "12px",
+            borderRadius: "5px",
+            color: colors.grey[100],
+            border: `1px solid ${colors.grey[500]}`,
+          }}
+        >
+   
+          <strong>{indexValue}</strong>
+        </div>
+      )}
       legends={[
         {
           anchor: "bottom",
@@ -67,19 +90,19 @@ const PieChart = ({ isCustomPieColors = false, isDashboard = false }) => {
           symbolShape: "circle",
         },
       ]}
-
       axisTop={null}
       axisRight={null}
-      axisBottom={{ 
-        orient : "bottom",
+      axisBottom={{
+        orient: "bottom",
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
         legendPosition: "middle",
         legendOffset: 36,
-        legend: isDashboard ? undefined : "transportation", legendOffset: 36 
-    }}
-      axisLeft={{ 
+        legend: isDashboard ? undefined : "transportation",
+        legendOffset: 36,
+      }}
+      axisLeft={{
         orient: "left",
         tickValues: 5,
         tickSize: 5,
@@ -88,48 +111,45 @@ const PieChart = ({ isCustomPieColors = false, isDashboard = false }) => {
         legend: isDashboard ? undefined : "count", // changed
         legendPosition: "middle",
         legendOffset: -40,
-        legend: "count", legendOffset: -40 }}
-/>
+        legend: "count",
+        legendOffset: -40,
+      }}
+    />
 
-
-
-
-
-//       tooltip={({ id, value, color, indexValue }) => (
-//         <div
-//           style={{
-//             background: theme.palette.mode === "dark" 
-//                 ? colors.primary[700] 
-//                 : colors.primary[100],
-//             padding: "12px",
-//             borderRadius: "8px",
-//             boxShadow: theme.shadows[3],
-//             color: theme.palette.mode === "dark" 
-//                 ? colors.grey[100] 
-//                 : colors.grey[900],
-//             border: `1px solid ${colors.grey[500]}`,
-//             minWidth: "180px"
-//         }}
-//     >
-//         <div style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}>
-//             <div style={{
-//                 width: "12px",
-//                 height: "12px",
-//                 backgroundColor: color,
-//                 marginRight: "8px",
-//                 borderRadius: "3px"
-//             }} />
-//             <strong>{indexValue}</strong>
-//         </div>
-//         <div style={{ marginLeft: "20px" }}>
-//             <div>ID: <strong>{id}</strong></div>
-//             <div>Label: <strong>{indexValue}</strong></div>
-//             <div>Value: <strong>{value}</strong></div>
-//             <div>Color: <strong>{color}</strong></div>
-//         </div>
-//     </div>
-// )}
-    
+    //       tooltip={({ id, value, color, indexValue }) => (
+    //         <div
+    //           style={{
+    //             background: theme.palette.mode === "dark"
+    //                 ? colors.primary[700]
+    //                 : colors.primary[100],
+    //             padding: "12px",
+    //             borderRadius: "8px",
+    //             boxShadow: theme.shadows[3],
+    //             color: theme.palette.mode === "dark"
+    //                 ? colors.grey[100]
+    //                 : colors.grey[900],
+    //             border: `1px solid ${colors.grey[500]}`,
+    //             minWidth: "180px"
+    //         }}
+    //     >
+    //         <div style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}>
+    //             <div style={{
+    //                 width: "12px",
+    //                 height: "12px",
+    //                 backgroundColor: color,
+    //                 marginRight: "8px",
+    //                 borderRadius: "3px"
+    //             }} />
+    //             <strong>{indexValue}</strong>
+    //         </div>
+    //         <div style={{ marginLeft: "20px" }}>
+    //             <div>ID: <strong>{id}</strong></div>
+    //             <div>Label: <strong>{indexValue}</strong></div>
+    //             <div>Value: <strong>{value}</strong></div>
+    //             <div>Color: <strong>{color}</strong></div>
+    //         </div>
+    //     </div>
+    // )}
   );
 };
 
